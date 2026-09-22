@@ -1,0 +1,170 @@
+####
+# Created by Fabio Pintore (INAF/IASF Pa, fabio.pintore@inaf.it)
+#            Saverio Lombardi (INAF/OAR, saverio.lombardi@inaf.it)
+# Date of creation: 2025/10/23
+# Version: 0.3
+#
+#
+# The parfile enables to set a number of parameters that are necessary
+# for the scientific analysis, and specifically to make the ASTRI jupyter
+# notebooks to run. Notebooks are base on Gammapy v.2.0.
+# You can execute them either interactively from the browser or from
+# command line by launching:
+#
+# jupyter execute name_of_notebook.ipynb
+#
+###
+---
+OUTPUT_RESULTS:
+    output_dir: "./quick-look_scientific_analysis"  # directory to save all results
+    theta2_output_dir: "theta2"  # directory to save all results
+    source_detection_output_dir: "source_detection"  # directory to save all results
+    1d_spec_analysis_output_dir: "1D_spectral_analysis"  # directory to save all results
+    lightcurve_analysis_output_dir: "lightcurve_analysis"  # directory to save all results
+
+DATA_ORIGIN:
+    telescope: "ASTRI-1" # available: 1) ASTRI-HORN; 2) ASTRI-1; 3) ASTRI MINI-ARRAY; 4) ASTRI Sub-Array
+    longitude: -16.50797 #deg; longitude of the observatory
+    latitude: 28.30102 #deg; latitude of the observatory
+
+INPUT_DATA:
+    input_EVT3: ["/mnt/e/ASTRI_Backup/20260127_HandsOn/Data/LV3/cc11/"] # it has to be a list of folders
+    input_IRF3: ["/mnt/e/ASTRI_Backup/20260127_HandsOn/Data/LV3/cc11/"] # it has to be a list of folders
+
+TARGET:
+    target_name: "Crab" # name of the target;
+    coord1: 83.63309 # right ascension or longitude of the target to be analyzed, in deg
+    coord2: 22.01449 # declination or latitude of the target to be analyzed, in deg
+#    coord1: 83.63240762489889 # right ascension or longitude of the target to be analyzed, in deg
+#    coord2: 22.01739478667196 # declination or latitude of the target to be analyzed, in deg
+    frame: "icrs" # available: "galactic", "icrs"
+
+EXCLUSION_REGIONS:
+#
+#    source: ["__src_name1__","__src_name2__"] # name of the sources to exclude;
+#
+    source: [] # name of the source to exclude;
+    src_coord1: [ra_coord_src1, ra_coord_src2] # right ascension or longitude of the source(s) to exclude, in deg
+    src_coord2: [dec_coord_src1, dec_coord_src2] # declination or latitude of the source(s) to exclude, in deg
+    src_radius: [on_reg_src1, on_reg_src2] # size of the region(s) to exclude, in deg
+    frame: [frame_src1, frame_src1] # available: "galactic", "icrs"
+
+RUN_SELECTION:
+    offset_max: 3 # maximum angular distance between pointing coordinates and target coordinates, in deg
+    zenith_min: 0 # minimum zenith angle value to select runs, in deg
+    zenith_max: 30 # maximum zenith angle value to select runs, in deg
+    
+    azimuth_min: 0 # minimum azimuth angle value to select runs, in deg
+    azimuth_max: 360 # maximum azimuth angle value to select runs, in deg
+
+    tstart: 0 # minimum time value to select runs, in seconds from reference time
+    tstop: 1e10 # maximum time value to select runs, in seconds from reference time
+
+DATASET_SETTINGS:
+    width: 3 # size of the dataset, in deg;
+    binsz: 0.02 # size of the geometric bins, in deg;
+    on_radius: 0.0225 # size of the ON region, in deg^2 (!);
+
+    energy_reco_min: 0.199526 # minimum reconstructed energy, in TeV;
+    energy_reco_max: 316.228 # maximum reconstructed energy, in TeV;
+    nbin_reco: 16 # number of bins for the reconstructed energy range;
+
+    energy_true_min: 0.01 # minimum true energy, in TeV;
+    energy_true_max: 10000. # maximum true energy, in TeV;
+    nbin_true: 300 # number of bins for the true energy range;
+    
+    full_reflected_regions: True # select all the available reflected regions or only the wobble ones; available: "True", "False"
+
+SAFEMASK_DATSET:
+    offset_max: 6 # offset max to mask the dataset, in deg;
+
+THETA2_PARAM: #to set only for the Theta2 plot notebook
+    energy_min: 0.7943 # minimum reconstruncted energy, in TeV;
+    energy_max: 5.0119 # maximum reconstruncted energy, in TeV;
+    min_rad: 0. # minimum theta2 value, in deg^2
+    max_rad: 0.5 # maximum theta2 value, in deg^2
+    nbin_rad: 50 # number of bins
+    on_radius: 0.04 # radius to estimate the significance, in deg2
+    off_regions_number: 5 # number of OFF regions; ignored if `usr_defined_off_position` is True and 1 OFF region is then used by default;
+    usr_defined_off_position: False # Flag to set if the OFF position is given by the user. Default is False (i.e. OFF region is the reflected position w.r.t. to the pointing position)
+    off_position_angle: "90 deg" #Angle between target position and OFF region (with same acceptance by default) w.r.t. the pointing position
+    gauss_fit_excess: False
+
+SOURCE_DET_PARAM:  #to set only for the Source detection notebook
+    bkg_src_detection: "ring_background" # select the bkg you want for the source detection; available: "FoV", "ring_background"
+    r_in: 0.2 # deg; inner radius of the ring region for BKG estimation; available only if `bkg_src_detection = ring_background`
+    width: 0.3 # deg; size of the ring region for BKG estimation; available only if `bkg_src_detection = ring_background`
+    energy_min: 0.7943 # in TeV
+    energy_max: 5.0119 # in TeV
+    sig_threshold: 5 # in sqrt(TS)
+    ts_threshold: 25 # in TS
+    min_distance: "0.2 deg" # minimum value to discriminate two sources
+    kernel_width: "0.25 deg"
+    correlation_radius: "0.15 deg"
+
+SPECTRAL_MODEL:
+#
+# Crab:
+# PowerLawSpectralModel(gamma=2.62, amplitude="2.83e-11 cm-2 s-1 TeV-1", reference="1 TeV") #HEGRA
+# LogParabolaSpectralModel.from_log10(alpha=2.51, beta=0.21, amplitude="3.39e-11 cm-2 s-1 TeV-1", reference="1 TeV") #MAGIC
+# LogParabolaSpectralModel.from_log10(alpha=2.48, beta=0.23, amplitude="2.95e-11 cm-2 s-1 TeV-1", reference="1 TeV") #MAGIC-VLZA
+#
+    model: "powerlaw" # offset max to mask the dataset, in deg; available: "powerlaw", "logparabola"
+    index: 2.62 # gamma of the powerlaw
+    amplitude: "1.0e-11 cm-2 s-1 TeV-1" # normalization of the model
+    reference: "2 TeV" # reference energy of the model
+#    model: "logparabola" # offset max to mask the dataset, in deg; available: "powerlaw", "logparabola"
+#    alpha: 2.48 # gamma of the logparabola
+#    beta: 0.23 # beta of the logparabola
+#    amplitude: "2.95e-11 cm-2 s-1 TeV-1" # normalization of the model
+#    reference: "1 TeV" # reference energy of the model
+
+SPECTRAL_MODEL_TO_COMPARE:
+#
+# Crab:
+# PowerLawSpectralModel(gamma=2.62, amplitude="2.83e-11 cm-2 s-1 TeV-1", reference="1 TeV") #HEGRA
+# LogParabolaSpectralModel.from_log10(alpha=2.51, beta=0.21, amplitude="3.39e-11 cm-2 s-1 TeV-1", reference="1 TeV") #MAGIC
+# LogParabolaSpectralModel.from_log10(alpha=2.48, beta=0.23, amplitude="2.95e-11 cm-2 s-1 TeV-1", reference="1 TeV") #MAGIC-VLZA
+#
+    name: "Crab - HEGRA"
+    model: "powerlaw" # offset max to mask the dataset, in deg; available: "powerlaw", "logparabola"
+    index: 2.62 # gamma of the powerlaw
+    amplitude: "2.83e-11 cm-2 s-1 TeV-1" # normalization of the model
+    reference: "1 TeV" # reference energy of the model
+#    name: "Crab - MAGIC VLZA"
+#    model: "logparabola" # offset max to mask the dataset, in deg; available: "powerlaw", "logparabola"
+#    alpha: 2.48 # gamma of the logparabola
+#    beta: 0.23 # beta of the logparabola
+#    amplitude: "2.95e-11 cm-2 s-1 TeV-1" # normalization of the model
+#    reference: "1 TeV" # reference energy of the model
+
+SPECTRAL_FIT:
+    energy_min: 0.5 # minimum energy for the spectral fitting, in TeV
+    energy_max: 125 # minimum energy for the spectral fitting, in TeV
+
+SPECTRAL_POINTS:
+    downsample: 1 # downsample value for the energy spectral points
+    n_sigma: 1 # number of sigma to use for each spectral point
+    n_sigma_ul: 3 # number of sigma to use for upper limits computation
+    sqrt_ts_threshold_ul: 1.5 # minimum significance for display spectral point
+    sed_type: "e2dnde"  # available: "dnde", "ednde", "e2dnde"
+
+SPECTRUM_PLOTTING_SETTINGS:
+    y_min:
+    y_max:
+    x_min:
+    x_max:
+
+LIGHTCURVE_ANALYSIS: #to set only for the lightcurve notebook
+    run_by_run: True # if True, `time_usr_defined` and `time_range` keywords are ignored and the lightcurve is also perfomed run by run; if False, no run-by-run lc is estimated
+    time_usr_defined: True # if True, uses the `time_range` keyword or, if this is empty, the `bin_time` keyword.
+    time_range:  # array of arrays with time start and time stop (example: [['2024-01-01T12:00:00.000', '2026-12-31T12:00:00.000']])
+    bin_time: 7 d #time bin; be careful, an astropy units has to be specified. Available, for example, "hr" for hours, "d" for days, "min" for minutes, "s" for seconds...;
+    format: "isot" # available all the astropy.time formats (e.g. MJD, isot...)
+    scale: "tt" # available all the astropy.time formats (e.g. utc, tt...)
+    emin: 0.5 # minimum energy for lightcurve integration, in TeV
+    emax: 40 # maximum energy for lightcurve integration, in TeV
+    lc_type: "eflux"
+    n_sigma: 1 # number of sigma to use for each spectral point
+    n_sigma_ul: 3 # number of sigma to use for upper limits computation
+    sqrt_ts_threshold_ul: 1.5 # minimum significance for display lightcurve point
