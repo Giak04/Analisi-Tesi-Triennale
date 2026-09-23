@@ -1,0 +1,59 @@
+Markarian 421, nucleo galattico attivo (blazar) ha avuto un flare nel periodo di osservazione.
+Chiedere a Francesco e Paolo
+
+Aprire immagini .fits usare python o ds9
+Aprire tabelle .fits usare python o fv (il più semplice) o topcat (il più pesante, ma più completo)
+Con python si tratta sempre di aprire in riga, ds9 e fv sono applicativi.
+
+In un file fits si trovano
+EventID (sono già scremati)
+Posizioni angolari di eventi, e camera
+Gammaness (Likelyhood che l'oggetto sia un fotone; una buona parte degli eventi rilevati è fondo anche se ha una discreta gammaness)
+I dati sono già ricostruiti stereo
+GTI (Good Time Interval)
+
+Generalmente il flusso di fotoni ha un massimo (in angoli di distanza) al centro della sorgente, per vedere il flusso della sorgente bisogna poter stimare il fondo e rimuoverlo.
+In genere non si punta la sorgente, ma si punta una serie di punti leggermente in offset che "girano intorno" alla sorgente, per poter stimare il fondo in maniera coerente.
+
+L'obiettivo è cercare di impostare questo lavoro di stima del fondo e di realizzare lo spettro della sorgente (stimando quello che risalta dal fondo) e fare un'immagine pesata con le funzioni di risposta (ra-dec).
+Se avanza tempo potremmo fare anche una curva di luce.
+
+
+(La versione più recente dei software di analisi è più performante, ma meno leggibile e meno didattica)
+Per gli strumenti di analisi, per evitare di trovare la sorgente serviranno: 
+-posizione della sorgente (più precisa è meglio è)
+-area interessata (da trovare dei dati)
+
+
+Altrimenti, si può provare anche a fare blind search e cercare la sorgente a partire dai dati.
+
+Provare a visualizzare tabelle e grafici (energia, gammaness)
+Provare a fare la mappa (ist. 2d) con ra-dec come assi ed istogramma a calori, si dovrebbe vedere sorgente e fondo
+Per ogni wobble diverso si dovrebbe vedere che la posizione della sorgente relativa al centro dovrebbe cambiare, ma le coordinate ra-dec dovrebbero rimanere costanti.
+
+I file '0210' sono file di eventi, i file '0502' sono file irf
+
+Parti di fisica interessanti (Preliminare):
+-Vedere come i fotoni si distribuiscono nel cielo (ra-dec ist.)
+-(IRF)Istogramma count-Energy difference ('True'-registrata) (vedere se cambia nei vari tagli, ad esempio)
+-Confrontare vari tagli in gammaness (più largo=più rumore, più stretto=più pulito ma meno dati)
+-Confrontare run diverse che hanno qualità diverse
+-unire più run per avere una qualità supposta migliore (il fondo dovrebbe rimanere uguale, le sorgenti dovrebbero risaltare di più)
+
+Poi, per passare alla parte scientifica (base gammapy) mi verranno dati degli strumenti 
+
+
+target_position vuole delle posizioni che si leggono dai file (le leggi tu)
+In generale, leggi i parametri dai file (IRF)
+
+Una buona cartina di tornasole sono i grafici excess e sqrtTS
+
+Istruzioni 22-09
+Mettere un taglio attorno al centro delle immagini (circa +-5° dal centro)
+Provare anche uno scatter plot oltre all'ist. 2D per vedere dove si distribuiscono i punti
+
+Fai studio thetasquare per vedere se stiamo rilevando una vera e propria sorgente o no
+cc0A indica un taglio in sensitivty, cc1A indica un taglio in gammaness
+cc00 = 0.05 h -> cc01 0.5 h ->cc02 5 h and so on
+cc10 95%, cc11 90%, cc12 80%, cc13 70% and so on
+
