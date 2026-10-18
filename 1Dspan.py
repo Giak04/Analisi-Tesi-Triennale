@@ -11,7 +11,7 @@ from astropy.table import Table
 from gammapy.data import Observation, Observations, observatory_locations, EventList
 from gammapy.datasets import MapDataset, MapDatasetEventSampler, FluxPointsDataset
 from gammapy.estimators import ASmoothMapEstimator, TSMapEstimator, ExcessMapEstimator
-from gammapy.estimators import FluxPointsEstimator
+from gammapy.estimators import FluxPointsEstimator, LightCurveEstimator
 from gammapy.estimators.utils import resample_energy_edges
 from gammapy.irf import load_irf_dict_from_file
 from gammapy.makers import MapDatasetMaker, RingBackgroundMaker, SafeMaskMaker
@@ -24,6 +24,7 @@ from gammapy.modeling.models import (
     FoVBackgroundModel,
     LightCurveTemplateTemporalModel,
     Models,
+    create_crab_spectral_model,
     PointSpatialModel,
     PowerLawSpectralModel,
     LogParabolaSpectralModel,
@@ -71,39 +72,39 @@ import glob, os, pathlib, itertools, warnings
 
 #Caricare i file di dati e irf
 
-dir0114_cc00 = './Analisi-Gammapy/Mrk421/data/2026-01-14/cc00/'
+dir0114_cc10 = './Analisi-Gammapy/Mrk421/data/2026-01-14/cc10/'
 
-d0114_cc00 = []
-for folder in dir0114_cc00 :
-    d0114_cc00.append(glob.glob(os.path.join(dir0114_cc00, '*Mrk421*_0201_*.fits.gz')))
+d0114_cc10 = []
+for folder in dir0114_cc10 :
+    d0114_cc10.append(glob.glob(os.path.join(dir0114_cc10, '*Mrk421*_0201_*.fits.gz')))
 
-d0114_cc00 = tuple(itertools.chain.from_iterable(d0114_cc00))
+d0114_cc10 = tuple(itertools.chain.from_iterable(d0114_cc10))
 
 
-i0114_cc00 = []
-for folder in dir0114_cc00 :
-    i0114_cc00.append(glob.glob(os.path.join(dir0114_cc00, f'*Mrk421*_0502_*.fits.gz')))
+i0114_cc10 = []
+for folder in dir0114_cc10 :
+    i0114_cc10.append(glob.glob(os.path.join(dir0114_cc10, f'*Mrk421*_0502_*.fits.gz')))
 
-i0114_cc00 = tuple(itertools.chain.from_iterable(i0114_cc00))
+i0114_cc10 = tuple(itertools.chain.from_iterable(i0114_cc10))
 
 #Controllo corretta lettura
 
-print(f"Il numero di run effettuate è {len(d0114_cc00)}; il numero di IRF è {len(i0114_cc00)}.")
-if len(i0114_cc00) != len(d0114_cc00):
+print(f"Il numero di run effettuate è {len(d0114_cc10)}; il numero di IRF è {len(i0114_cc10)}.")
+if len(i0114_cc10) != len(d0114_cc10):
     warnings.warn("Il numero di run effettuate non coincide con quello delle IRF, controllare l'input e riprovare.")
 else:
     print("Le run presenti corrispondono alla IRF.")
 
-dst0114_cc00 = DataStore.from_events_files(np.sort(d0114_cc00), irfs_paths=np.sort(i0114_cc00))
+dst0114_cc10 = DataStore.from_events_files(np.sort(d0114_cc10), irfs_paths=np.sort(i0114_cc10))
 
-dst0114_cc00.hdu_table.write("hdu-index.fits.gz", overwrite=True)
-dst0114_cc00.obs_table.write("obs-index.fits.gz", overwrite=True)
+dst0114_cc10.hdu_table.write("hdu-index.fits.gz", overwrite=True)
+dst0114_cc10.obs_table.write("obs-index.fits.gz", overwrite=True)
 
-obs_date = dst0114_cc00.obs_table[0]["EVENTS_FILENAME"].split("/")[-1][0:8]
+obs_date = dst0114_cc10.obs_table[0]["EVENTS_FILENAME"].split("/")[-1][0:8]
 
 #Creazione colonne AZ/ZD
 
-ev_header = Table.read(dst0114_cc00.obs_table["EVENTS_FILENAME"][0], hdu=1)
+ev_header = Table.read(dst0114_cc10.obs_table["EVENTS_FILENAME"][0], hdu=1)
 meta = ev_header.meta
 loc = EarthLocation(
             lat=28.2973583333,
@@ -111,17 +112,17 @@ loc = EarthLocation(
         )
 #Latitudine e Longitudine prese dall'header dei file, lette direttamente attraverso fv
 
-mjdtime = ( ((dst0114_cc00.obs_table["TSTART"] + dst0114_cc00.obs_table["TSTOP"])/2).to("d") 
-           + (dst0114_cc00.obs_table["MJDREFI"] + dst0114_cc00.obs_table["MJDREFF"]) * u.d )
+mjdtime = ( ((dst0114_cc10.obs_table["TSTART"] + dst0114_cc10.obs_table["TSTOP"])/2).to("d") 
+           + (dst0114_cc10.obs_table["MJDREFI"] + dst0114_cc10.obs_table["MJDREFF"]) * u.d )
 observing_time = Time(mjdtime, format="mjd", scale="tt")  
 
 altazframe = AltAz(location=loc, obstime=observing_time)
-dst0114_cc00.obs_table["DATE-OBS"] = observing_time.isot 
-coord = SkyCoord(dst0114_cc00.obs_table["RA_PNT"], dst0114_cc00.obs_table["DEC_PNT"], unit="deg", frame="icrs")
+dst0114_cc10.obs_table["DATE-OBS"] = observing_time.isot 
+coord = SkyCoord(dst0114_cc10.obs_table["RA_PNT"], dst0114_cc10.obs_table["DEC_PNT"], unit="deg", frame="icrs")
 coord_altaz = coord.transform_to(altazframe)
 
-dst0114_cc00.obs_table["AZ_PNT"] = coord_altaz.az.deg * u.deg
-dst0114_cc00.obs_table["ZD_PNT"] = coord_altaz.zen.deg * u.deg
+dst0114_cc10.obs_table["AZ_PNT"] = coord_altaz.az.deg * u.deg
+dst0114_cc10.obs_table["ZD_PNT"] = coord_altaz.zen.deg * u.deg
 
 target_position = SkyCoord(ra=166.1138, 
                            dec=38.2088, 
@@ -140,16 +141,16 @@ selection_offset = dict(type='sky_circle',
 
 #Ho scelto di non fare selezioni particolari, non avendo ancora mai aperto questi file
 
-print(f"The mean exposure of the runs is {np.mean(dst0114_cc00.obs_table['LIVETIME']) * u.s} \n")
-print(f"The total exposure time is {(np.sum(dst0114_cc00.obs_table['LIVETIME']) * u.s).to('hr')} \n")
-print(f"The total runs are {len(dst0114_cc00.obs_table['OBS_ID'])}. These are the selected ObsID: \n {dst0114_cc00.obs_table['OBS_ID']} \n")
+print(f"The mean exposure of the runs is {np.mean(dst0114_cc10.obs_table['LIVETIME']) * u.s} \n")
+print(f"The total exposure time is {(np.sum(dst0114_cc10.obs_table['LIVETIME']) * u.s).to('hr')} \n")
+print(f"The total runs are {len(dst0114_cc10.obs_table['OBS_ID'])}. These are the selected ObsID: \n {dst0114_cc10.obs_table['OBS_ID']} \n")
 
-print("Ampiezza in gradi RA:", np.max(dst0114_cc00.obs_table['RA_PNT']) - np.min(dst0114_cc00.obs_table['RA_PNT']), '\n', "DEC:", np.max(dst0114_cc00.obs_table['DEC_PNT']) - np.min(dst0114_cc00.obs_table['DEC_PNT']))
+print("Ampiezza in gradi RA:", np.max(dst0114_cc10.obs_table['RA_PNT']) - np.min(dst0114_cc10.obs_table['RA_PNT']), '\n', "DEC:", np.max(dst0114_cc10.obs_table['DEC_PNT']) - np.min(dst0114_cc10.obs_table['DEC_PNT']))
 
 
 #Presa delle osservazioni e reflected regions
 
-observations = dst0114_cc00.get_observations(obs_id=dst0114_cc00.obs_table['OBS_ID'])
+observations = dst0114_cc10.get_observations(obs_id=dst0114_cc10.obs_table['OBS_ID'])
 
 width = 3
 binsz = 0.02
@@ -187,10 +188,10 @@ exclusion_mask.plot()
 
 plt.savefig('ProvaMaschera1D.png')
 
-#print(dst0114_cc00.obs_table.columns)
+#print(dst0114_cc10.obs_table.columns)
 
 '''
-irf = load_irf_dict_from_file('./Analisi-Preliminare/Mrk421/data/20260114/cc00/20260114_MA_Mrk421_W0.50p000_00001506_R_003540_0502_cc00.lv3.fits.gz')
+irf = load_irf_dict_from_file('./Analisi-Preliminare/Mrk421/data/20260114/cc10/20260114_MA_Mrk421_W0.50p000_00001506_R_003540_0502_cc10.lv3.fits.gz')
 print(irf)
 
 '''
@@ -310,10 +311,11 @@ erange = energy_axis.edges
 
 min_rad, max_rad, nbin = (0, 
                           0.5, 
-                          50)
+                          350)
+#ho cambiato il 50 da grafico a grafico ad un 300 per un solo grafico
 rad_axis = MapAxis.from_bounds(min_rad, max_rad, nbin=nbin, unit="deg2", interp="lin")
 
-exp_tot = (np.sum(dst0114_cc00.obs_table['LIVETIME']) * u.s).to('hr')
+exp_tot = (np.sum(dst0114_cc10.obs_table['LIVETIME']) * u.s).to('hr')
 
 def make_theta_squared_table_modified(
     observations, 
@@ -498,16 +500,22 @@ def make_theta_squared_table_reflected(
     table.meta["ON_DEC"] = position.icrs.dec
     return table
 
-
+'''
 n, sigma, c = 50, 0.02, 0
 col = 4
 row = int((len(erange) - 1) / col)
 ratio = int(col / row)
-
-fig, axs = plt.subplots(row, col, figsize=(18, 18/ratio))
+'''
+fig, axs = plt.subplots(1, 1, figsize=(18, 18))
 
 j, jj = 0, 0
 best, best_err = [], []
+
+print('erange', erange)
+#qui devo ancora capire come sistemare erange, per ora lo ridefinisco e basta
+#erange=np.array([1.99526000e-01, 3.16228000e+02])*u.TeV
+#Ho modificato il range guardando quali range di energia aveva senso osservare e quali no
+erange=np.array([0.5, 3.16228000e+02])*u.TeV
 for i in np.arange(len(erange)-1):
     energy = np.sqrt(erange[1:] * erange[:-1])[i]
 
@@ -519,7 +527,7 @@ for i in np.arange(len(erange)-1):
                                            position_off=None,
                                            off_regions_number = 1,
                                            energy_edges=[erange[i], erange[i+1]])
-
+    print(theta2_dist, " energy: ", energy)
 #off_regions_number messo ad 1 perchè era il valore che avevo visto prima
 
     theta2_dist_mod = theta2_dist[theta2_dist["theta2_max"] <= 0.04]
@@ -543,7 +551,7 @@ for i in np.arange(len(erange)-1):
     x_edges = theta2_axis.edges.value
     xerr = (x - x_edges[:-1], x_edges[1:] - x)
 
-    axs[j,jj].errorbar(
+    axs.errorbar(
         x,
         theta2_dist["counts"],
         xerr=xerr,
@@ -552,7 +560,7 @@ for i in np.arange(len(erange)-1):
         label=r"N$_{on}$ = "+ f"{n_on}" + r"$\pm$" + f"{int(n_on**0.5)}",
     )
 
-    axs[j,jj].errorbar(
+    axs.errorbar(
         x,
         theta2_dist["counts_off"] * theta2_dist["alpha"],
         xerr=xerr,
@@ -562,7 +570,7 @@ for i in np.arange(len(erange)-1):
     )
 
     
-    axs[j,jj].errorbar(
+    axs.errorbar(
         x,
         theta2_dist["excess"],
         xerr=xerr,
@@ -572,9 +580,9 @@ for i in np.arange(len(erange)-1):
         label=r"N$_{exc}$ = "+ f"{np.round(excs,2)}" + r"$\pm$" + f"{int(excess_errn)}",
     )
 
-    axs[j,jj].set_ylabel("Counts")
-    axs[j,jj].set_xlabel("Theta2 (deg2)")
-    axs[j,jj].legend()
+    axs.set_ylabel("Counts", fontsize=14)
+    axs.set_xlabel("Theta2 (deg2)", fontsize=14)
+    axs.legend()
 
     if False:
         popt, pcov = curve_fit(gaus_cost, x, theta2_dist["excess"],
@@ -586,15 +594,15 @@ for i in np.arange(len(erange)-1):
         best_err.append(pcov)
         
         sig_irf = irf_psf.containment_radius(fraction=0.68, energy_true=[energy]*u.TeV, offset=[0.5]*u.deg) * 0.6624305
-        axs[j,jj].plot(x, gaus_cost(x, *popt), label=f"{np.round(popt[1]**0.5,3)} deg, {np.round(sig_irf[0],3)}", color="green")
+        axs.plot(x, gaus_cost(x, *popt), label=f"{np.round(popt[1]**0.5,3)} deg, {np.round(sig_irf[0],3)}", color="green")
 
-    y_min, y_max = axs[j,jj].get_ylim()
-    axs[j,jj].fill_between(x_edges[(x_edges <= 0.04)], y_min, y_max, alpha=0.3)
+    y_min, y_max = axs.get_ylim()
+    axs.fill_between(x_edges[(x_edges <= 0.04)], y_min, y_max, alpha=0.3)
 
-    axs[j,jj].set_title(f"{np.round(erange[i],2)}-{np.round(erange[i+1],2)}; " + r"$\sigma$ = " + f"{np.round(stat_ws.sqrt_ts,2)}")
+    axs.set_title(f"{np.round(erange[i],2)}-{np.round(erange[i+1],2)}; " + r"$\sigma$ = " + f"{np.round(stat_ws.sqrt_ts,2)}", fontsize="18")
 
-    legend = axs[j,jj].legend(fontsize="8", loc ="upper right")
-    handles, labels = axs[j,jj].get_legend_handles_labels()
+    legend = axs.legend(fontsize="14", loc ="upper right")
+    handles, labels = axs.get_legend_handles_labels()
     handles.append(Patch(facecolor='w', edgecolor='w'))
     labels.append(f"Time = {np.round(exp_tot,2)} \n" + 
                   r"$N_{exc}/Time$ = " + f"{np.round((excs) / exp_tot.value,2)} " + r"evt/h" + "\n" +
@@ -607,19 +615,160 @@ for i in np.arange(len(erange)-1):
     legend._set_loc(legend._loc)
     legend.set_title(legend.get_title().get_text())
 
-    axs[j,jj].set_ylim(y_min,y_max)
-    axs[j,jj].set_xlim(0)
+    axs.set_ylim(y_min,y_max)
+    axs.set_xlim(0)
 
-    axs[j,jj].hlines(0, x_edges[0], x_edges[-1], color="green", linestyles="dashed")
+    axs.hlines(0, x_edges[0], x_edges[-1], color="green", linestyles="dashed")
 
-    jj += 1
-    if jj == 4:
-        jj = 0
-        j += 1
+
         
-fig.tight_layout(pad=2.0)
+#fig.tight_layout(pad=2.0)
 
 plt.savefig('Theta2_plot.png')
+
+#----------------------------------------------------------------------------------------------
+#lightcurve
+
+'''
+if global_parameters['SPECTRAL_MODEL_TO_COMPARE']['model'] == "powerlaw":
+    model_crab = PowerLawSpectralModel(index=global_parameters['SPECTRAL_MODEL_TO_COMPARE']['index'], 
+                                           amplitude=global_parameters['SPECTRAL_MODEL_TO_COMPARE']['amplitude'], 
+                                           reference=global_parameters['SPECTRAL_MODEL_TO_COMPARE']['reference'])
+    name = global_parameters['SPECTRAL_MODEL_TO_COMPARE']['name']
+if global_parameters['SPECTRAL_MODEL_TO_COMPARE']['model'] == "logparabola":
+    model_crab = LogParabolaSpectralModel(alpha=global_parameters['SPECTRAL_MODEL_TO_COMPARE']['alpha'], 
+                                              beta=global_parameters['SPECTRAL_MODEL_TO_COMPARE']['beta'], 
+                                              amplitude=global_parameters['SPECTRAL_MODEL_TO_COMPARE']['amplitude'], 
+                                              reference=global_parameters['SPECTRAL_MODEL_TO_COMPARE']['reference'])
+    name = global_parameters['SPECTRAL_MODEL_TO_COMPARE']['name']
+'''
+
+spectral_model = PowerLawSpectralModel(index=2.62, amplitude="2.83e-11 cm-2 s-1 TeV-1", reference="1 TeV")
+
+name = "Mrk421"
+
+
+emin, emax = 0.5 * u.TeV, 50 * u.TeV
+
+#model_crab = LogParabolaSpectralModel.from_log10(alpha=2.47, beta=0.24, amplitude="3.23e-11 cm-2 s-1 TeV-1", reference="1 TeV")
+flux = spectral_model.energy_flux_error(emin,emax).to("erg cm-2 s-1")
+flux_int = spectral_model.integral_error(emin,emax)
+
+dataset_stacked = Datasets(datasets).stack_reduce()
+
+model = SkyModel(spectral_model=spectral_model, name="Mrk421")
+dataset_stacked.models = model
+dataset_stacked.models[0].spectral_model.amplitude.min = 0
+
+dataset_stacked.mask_fit = dataset_stacked.counts.geom.energy_mask(
+    energy_min=0.5 * u.TeV, energy_max=215*u.TeV
+)
+
+# #sky_model = SkyModel(spectral_model=spectral_model, name="crab")
+sky_model = SkyModel(spectral_model=dataset_stacked.models[0].spectral_model, name='Mrk421')
+
+models = Models([sky_model])
+datasets.models = models
+
+time_range = [['2026-01-15T02:01:04', '2026-01-15T02:39:24'],['2026-01-15T02:41:06','2026-01-15T03:19:26'],['2026-01-15T03:24:16','2026-01-15T04:02:36'],['2026-01-15T04:04:42','2026-01-15T04:43:02']]
+
+
+#print(datasets, '\n', dataset_stacked)
+'''
+time_intervals = [Time([str((datasets[0].gti.time_start - 5*u.s).isot[0]), str((datasets[-1].gti.time_stop + 5*u.s).isot[-1])], 
+                     format = "isot",
+                     scale = datasets[0].gti.time_start.scale
+                    )]
+'''
+    
+
+#print('time: ', str((datasets[2+1].gti.time_start).isot[0]))
+#print('time: ', str((datasets[2+1].gti.time_start).isot[-1]))
+
+if time_range is not None:
+    time_intervals = []
+    '''
+    for i in [0, 1, 2, 3]:
+            time_intervals.append(Time([str((datasets[i].gti.time_start).isot[0]), str((datasets[i].gti.time_stop).isot[-1])], format = "isot", scale = datasets[i].gti.time_start.scale))
+            #time_intervals.append(Time(time_range[i], 
+                                       #format="isot", 
+                                       #scale="tt"))
+    '''
+    for i in [0, 1, 2, 3]:
+        time_intervals.append(Time(time_range[i], format = "isot", scale = "tt"))
+
+else:
+    raise ValueError("For user defined time intervals, one amongst either `time_usr_defined` or `bin_time` keywords has to be defined!")
+
+Time_interval=[]
+
+for i in range(4):
+    Time_interval.append(Time([str((datasets[i].gti.time_start - 5*u.s).isot[0]), str((datasets[i].gti.time_stop + 5*u.s).isot[-1])], 
+                     format = "isot",
+                     scale = datasets[i].gti.time_start.scale
+                    ))
+'''
+compare = [Time([str((datasets[0].gti.time_start - 5*u.s).isot[0]), str((datasets[0].gti.time_stop + 5*u.s).isot[-1])], 
+                     format = "isot",
+                     scale = datasets[0].gti.time_start.scale
+                    )]
+compare.append([Time([str((datasets[1].gti.time_start - 5*u.s).isot[0]), str((datasets[1].gti.time_stop + 5*u.s).isot[-1])], 
+                     format = "isot",
+                     scale = datasets[1].gti.time_start.scale
+                    )])
+compare.append([Time([str((datasets[2].gti.time_start - 5*u.s).isot[0]), str((datasets[2].gti.time_stop + 5*u.s).isot[-1])], 
+                     format = "isot",
+                     scale = datasets[2].gti.time_start.scale
+                    )])
+compare.append([Time([str((datasets[3].gti.time_start - 5*u.s).isot[0]), str((datasets[3].gti.time_stop + 5*u.s).isot[-1])], 
+                     format = "isot",
+                     scale = datasets[3].gti.time_start.scale
+                    )])
+'''
+#print('Intervalli temporali: ', time_intervals, '\n', "comparazione: ", Time_interval)
+
+lc_maker_all = LightCurveEstimator(
+    energy_edges=[emin,emax],
+    time_intervals=Time_interval,
+    source="Mrk421",
+    reoptimize=False,
+    selection_optional="all",
+    n_sigma=1, 
+    n_sigma_ul=3, 
+    n_jobs=7
+)
+
+lc_maker_all.norm.scan_max = 3
+
+time_lc = lc_maker_all.run(datasets)
+time_lc.sqrt_ts_threshold_ul = 7 # in units of sqrt(TS), era 1.5
+
+
+fig, ax = plt.subplots(
+    figsize=(8, 6),
+    gridspec_kw={"left": 0.16, "bottom": 0.2, "top": 0.98, "right": 0.98},
+)
+
+sed_type = "eflux"
+
+b = time_lc.plot(ax=ax, sed_type=sed_type, color="tab:orange", label = f"{emin} - {emax}", axis_name="time")
+
+#ax.set_yscale("linear")
+ax.set_yscale("log")
+
+if sed_type == "eflux":
+    ax.plot(ax.xaxis.get_view_interval(), 
+            np.ones_like(ax.xaxis.get_view_interval()) * flux[0], label = name, ls="dashed")
+
+if sed_type == "flux":
+    ax.plot(ax.xaxis.get_view_interval(), 
+            np.ones_like(ax.xaxis.get_view_interval()) * flux_int[0], label = name, ls="dashed")
+
+#time_lc.plot_ts_profiles(ax=ax, sed_type=sed_type)
+plt.legend()
+plt.savefig(f"Sed.pdf", bbox_inches='tight')
+plt.savefig(f"Sed.png", bbox_inches='tight')
+
 
 '''
 if global_parameters['DATASET_SETTINGS']['full_reflected_regions'] == False:

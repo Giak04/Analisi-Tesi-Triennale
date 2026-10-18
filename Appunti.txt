@@ -57,3 +57,27 @@ cc0A indica un taglio in sensitivty, cc1A indica un taglio in gammaness
 cc00 = 0.05 h -> cc01 0.5 h ->cc02 5 h and so on
 cc10 95%, cc11 90%, cc12 80%, cc13 70% and so on
 
+Provare a fare istogramma energia o hist 2d energia e gammaness per gli 0A.
+Vedere se il taglio è lo stesso per tutte le energie o se cambia in base all'energia.
+Fare Theta2 plot per tutti i dati assieme.
+
+Fare countmap e theta2 giorno per giorno, poi vedere tutto insieme.
+Per la curva di luce, provare intanto per una notte.
+
+Roadmap:
+12-16 Curve di Luce e flusso
+19-28 spettro, spettro diviso per periodi
+Potrebbe essere buono prendere i dati Magic/Veritas e fare confronto tra gli spettri (Sarà utile inserire comunque lo studio di altri nella tesi)
+
+Indice e titolo Tesi
+L'argomento sarà la VHEAP (VeryHighEnergyAstroPhysics), io in particolare ho studiato un blazar
+
+-Introduzione (da scrivere alla fine)(composto da una paronamica seguita dalla descrizione di ogni capitolo)
+-VHEAP (finendo nella trattazione dei blazar)
+-Telescopi Cherenkov e ASTRI
+-Panoramica di Markarian421 (in generale e nel gamma)(guardare osservazioni passate di Fermi, vedere sia fasi di flare che quiescenti)(estrarre la curva di luce del periodo interessato)
+-Analisi (presentare i risultati ottenuti e confrontarli con quelli ottenuti da Fermi e, se ci sono, altri strumenti cherenkov, specialmente confrontare curve di luce e SED)
+-Conclusioni (da scrivere alla fine)(qua si riparte ripetendo ciò di cui si è parlato e riepilogando brevemente i risultati ottenuti)
+
+Le referenze devono essere in ordine di apparizione
+(consiglio: biptec, file a parte in cui inserire le referenze che le ordina automaticamente in base all'ordine di chiamata)
