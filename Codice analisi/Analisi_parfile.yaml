@@ -1,0 +1,26 @@
+
+
+
+
+
+
+
+
+---
+INPUT_DATA:
+    path_gen: './Analisi-Gammapy/Mrk421/data/cc10Gen/'
+    path_feb: './Analisi-Gammapy/Mrk421/data/cc10Feb'
+
+
+DATA_ORIGIN:
+    lon: -16.5106222222
+    lat: 28.2973583333
+
+TARGET:
+    name: 'Mrk421'
+    ra: 166.1138 
+    dec: 38.2088
+
+LIGHTCURVE:
+    index: 2.22 #index preso da arXiv:1909.01179, reference presa dal parfile
+    amplitude: "2.83e-11 cm-2 s-1 TeV-1"
