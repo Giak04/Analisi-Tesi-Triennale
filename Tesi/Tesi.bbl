@@ -1,0 +1,45 @@
+% $ biblatex auxiliary file $
+% $ biblatex bbl format version 3.2 $
+% Do not modify the above lines!
+%
+% This is an auxiliary file used by the 'biblatex' package.
+% This file may safely be deleted. It will be recreated as
+% required.
+%
+\begingroup
+\makeatletter
+\@ifundefined{ver@biblatex.sty}
+  {\@latex@error
+     {Missing 'biblatex' package}
+     {The bibliography requires the 'biblatex' package.}
+      \aftergroup\endinput}
+  {}
+\endgroup
+
+\datalist[entry]{nty/global//global/global}
+  \entry{GRA2018}{article}{}
+    \name{author}{1}{}{%
+      {{hash=ADAMM}{%
+         family={A.\bibnamedelima De\bibnamedelima Angelis},
+         familyi={A\bibinitperiod\bibinitdelim D\bibinitperiod\bibinitdelim
+  A\bibinitperiod},
+         given={M.\bibnamedelima Mallamaci},
+         giveni={M\bibinitperiod\bibinitdelim M\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{ADAMM1}
+    \strng{fullhash}{ADAMM1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{sortinit}{A}
+    \field{sortinithash}{A}
+    \verb{doi}
+    \verb 10.1140/epjp/i2018-12181-0
+    \endverb
+    \field{title}{Gamma-Ray Astrophysics}
+    \field{volume}{133}
+    \field{journaltitle}{The European Physical Journal Plus}
+    \field{year}{2018}
+  \endentry
+\enddatalist
+\endinput
