@@ -93,5 +93,29 @@
     \field{journaltitle}{New Astronomy}
     \field{year}{2000}
   \endentry
+
+  \entry{FRiA}{article}{}
+    \name{author}{1}{}{%
+      {{hash=FGLSG}{%
+         family={F.\bibnamedelima Giovannelli},
+         familyi={F\bibinitperiod\bibinitdelim G\bibinitperiod},
+         given={L.\bibnamedelima Sabau-Graziati},
+         giveni={L\bibinitperiod\bibinitdelim S\bibinithyphendelim
+  G\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{FGLSG1}
+    \strng{fullhash}{FGLSG1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{sortinit}{F}
+    \field{sortinithash}{F}
+    \verb{doi}
+    \verb 10.22323/1.269.0001
+    \endverb
+    \field{title}{Frontier Research in Astrophysics - A Review}
+    \field{journaltitle}{Proceedings of Frontier Research in Astrophysics}
+    \field{year}{2017}
+  \endentry
 \enddatalist
 \endinput

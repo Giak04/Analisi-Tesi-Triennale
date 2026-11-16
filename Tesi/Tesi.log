@@ -1,4 +1,4 @@
-This is LuaHBTeX, Version 1.17.0 (TeX Live 2023/Debian)  (format=lualatex 2026.11.14)  15 NOV 2026 19:42
+This is LuaHBTeX, Version 1.17.0 (TeX Live 2023/Debian)  (format=lualatex 2026.11.11)  16 NOV 2026 11:20
  restricted system commands enabled.
 **Tesi.tex
 (./Tesi.tex
@@ -8,8 +8,8 @@ Lua module: luaotfload 2023-08-31 3.26 Lua based OpenType font support
 Lua module: lualibs 2023-07-13 2.76 ConTeXt Lua standard libraries.
 Lua module: lualibs-extended 2023-07-13 2.76 ConTeXt Lua libraries -- extended c
 ollection.
-luaotfload | conf : Root cache directory is "/home/giacomo/.texlive2023/texmf-va
-r/luatex-cache/generic/names".
+luaotfload | conf : Root cache directory is "/home/giak19/.texlive2023/texmf-var
+/luatex-cache/generic/names".
 luaotfload | init : Loading fontloader "fontloader-2023-08-19.lua" from kpse-res
 olved path "/usr/share/texlive/texmf-dist/tex/luatex/luaotfload/fontloader-2023-
 08-19.lua".
@@ -20,8 +20,8 @@ Inserting `luaotfload.node_processor' in `hpack_filter'.
 Inserting `luaotfload.glyph_stream' in `glyph_stream_provider'.
 Inserting `luaotfload.define_font' in `define_font'.
 Lua-only attribute luaotfload_color_attribute = 2
-luaotfload | conf : Root cache directory is "/home/giacomo/.texlive2023/texmf-va
-r/luatex-cache/generic/names".
+luaotfload | conf : Root cache directory is "/home/giak19/.texlive2023/texmf-var
+/luatex-cache/generic/names".
 Inserting `luaotfload.harf.strip_prefix' in `find_opentype_file'.
 Inserting `luaotfload.harf.strip_prefix' in `find_truetype_file'.
 Removing  `luaotfload.glyph_stream' from `glyph_stream_provider'.
@@ -44,8 +44,8 @@ mf-dist/tex/latex/base/article.cls
 Document Class: article 2023/05/17 v1.4n Standard LaTeX document class
 (/usr/share/texlive/texmf-dist/tex/latex/base/size10.clo
 File: size10.clo 2023/05/17 v1.4n Standard LaTeX file (size option)
-luaotfload | db : Font names database loaded from /home/giacomo/.texlive2023/tex
-mf-var/luatex-cache/generic/names/luaotfload-names.luc.gz)
+luaotfload | db : Font names database loaded from /home/giak19/.texlive2023/texm
+f-var/luatex-cache/generic/names/luaotfload-names.luc.gz)
 \c@part=\count185
 \c@section=\count186
 \c@subsection=\count187
@@ -632,8 +632,8 @@ Package filecontents Warning: This package is obsolete. Disabling it and
 (filecontents)                defined by the LaTeX kernel.
 
 )
-luaotfload | cache : Lookup cache loaded from /home/giacomo/.texlive2023/texmf-v
-ar/luatex-cache/generic/names/luaotfload-lookup-cache.luc.
+luaotfload | cache : Lookup cache loaded from /home/giak19/.texlive2023/texmf-va
+r/luatex-cache/generic/names/luaotfload-lookup-cache.luc.
 luaotfload | aux : font no 23 (nil) does not define feature smcp for script latn
  with language dflt
 luaotfload | aux : font no 24 (nil) does not define feature smcp for script latn
@@ -833,35 +833,26 @@ Underfull \hbox (badness 10000) in paragraph at lines 41--45
 
  []
 
+<./Immagini/GreatPhotonSpectrum.png, id=10, 429.605pt x 352.31625pt>
+File: ./Immagini/GreatPhotonSpectrum.png Graphic file (type png)
+<use ./Immagini/GreatPhotonSpectrum.png>
+Package luatex.def Info: ./Immagini/GreatPhotonSpectrum.png  used on input line
+ 57.
+(luatex.def)             Requested size: 189.75105pt x 155.61635pt.
 Excluding 'comment' comment.
-Underfull \hbox (badness 10000) in paragraph at lines 52--69
+Underfull \hbox (badness 10000) in paragraph at lines 81--83
+
+ []
+
+[2<./Immagini/GreatPhotonSpectrum.png>]
+Underfull \hbox (badness 10000) in paragraph at lines 86--88
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 70--72
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 75--77
-
- []
-
-
-Overfull \hbox (1.70999pt too wide) in paragraph at lines 80--82
+Overfull \hbox (1.70999pt too wide) in paragraph at lines 91--93
 []\TU/LatinModernRoman(0)/m/n/10 Nonos-tante la dif-fi-coltà nell’os-ser-vare
  questi fo-toni per via dell’opac-ità dell’at-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 80--82
-
- []
-
-[2]
-Underfull \hbox (badness 10000) in paragraph at lines 85--90
-
  []
 
 
@@ -870,11 +861,21 @@ Underfull \hbox (badness 10000) in paragraph at lines 91--93
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 94--105
+Underfull \hbox (badness 10000) in paragraph at lines 96--101
 
  []
 
-[3] [4] [5] [6] [7] [8] [9] (./Tesi.aux)
+
+Underfull \hbox (badness 10000) in paragraph at lines 102--104
+
+ []
+
+[3]
+Underfull \hbox (badness 10000) in paragraph at lines 105--116
+
+ []
+
+[4] [5] [6] [7] [8] [9] (./Tesi.aux)
  ***********
 LaTeX2e <2023-11-01> patch level 1
 L3 programming layer <2024-01-22>
@@ -885,15 +886,15 @@ Package logreq Info: Writing requests to 'Tesi.run.xml'.
 )
 
 Here is how much of LuaTeX's memory you used:
- 19610 strings out of 476553
+ 19634 strings out of 476553
  100000,1977958 words of node,token memory allocated
  579 words of node memory still in use:
    6 hlist, 2 vlist, 2 rule, 2 glue, 4 kern, 1 glyph, 6 attribute, 71 glue_spec,
  6 attribute_list, 1 write nodes
-   avail lists: 1:1,2:218,3:94,4:20,5:319,6:19,7:7999,8:29,9:143,10:9,11:593
- 41346 multiletter control sequences out of 65536+600000
+   avail lists: 1:1,2:272,3:118,4:24,5:292,6:19,7:7040,8:29,9:138,10:9,11:530
+ 41367 multiletter control sequences out of 65536+600000
  74 fonts using 5981743 bytes
- 79i,6n,89p,1874b,1130s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 79i,6n,89p,1874b,1450s stack positions out of 10000i,1000n,20000p,200000b,200000s
 </usr/share/texmf/fonts/opentype/public/lm/lmmono10-regular.otf></usr/share/texm
 f/fonts/opentype/public/lm/lmroman10-italic.otf></usr/share/texmf/fonts/opentype
 /public/lm/lmroman10-regular.otf></usr/share/texmf/fonts/opentype/public/lm/lmro
@@ -902,9 +903,9 @@ man12-bold.otf></usr/share/texmf/fonts/opentype/public/lm/lmroman12-regular.otf>
 live/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texlive/tex
 mf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/share/texlive/texmf-dist/f
 onts/type1/public/amsfonts/cm/cmsy7.pfb>
-Output written on Tesi.pdf (9 pages, 66208 bytes).
+Output written on Tesi.pdf (9 pages, 111116 bytes).
 
-PDF statistics: 86 PDF objects out of 1000 (max. 8388607)
+PDF statistics: 87 PDF objects out of 1000 (max. 8388607)
  53 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 131072)
  1 words of extra memory for PDF output out of 10000 (max. 100000000)
