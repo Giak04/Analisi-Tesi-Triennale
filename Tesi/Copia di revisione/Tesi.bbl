@@ -1,0 +1,121 @@
+% $ biblatex auxiliary file $
+% $ biblatex bbl format version 3.2 $
+% Do not modify the above lines!
+%
+% This is an auxiliary file used by the 'biblatex' package.
+% This file may safely be deleted. It will be recreated as
+% required.
+%
+\begingroup
+\makeatletter
+\@ifundefined{ver@biblatex.sty}
+  {\@latex@error
+     {Missing 'biblatex' package}
+     {The bibliography requires the 'biblatex' package.}
+      \aftergroup\endinput}
+  {}
+\endgroup
+
+\datalist[entry]{nty/global//global/global}
+  \entry{GRA2018}{article}{}
+    \name{author}{1}{}{%
+      {{hash=ADAMM}{%
+         family={A.\bibnamedelima De\bibnamedelima Angelis},
+         familyi={A\bibinitperiod\bibinitdelim D\bibinitperiod\bibinitdelim
+  A\bibinitperiod},
+         given={M.\bibnamedelima Mallamaci},
+         giveni={M\bibinitperiod\bibinitdelim M\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{ADAMM1}
+    \strng{fullhash}{ADAMM1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{sortinit}{A}
+    \field{sortinithash}{A}
+    \verb{doi}
+    \verb 10.1140/epjp/i2018-12181-0
+    \endverb
+    \field{title}{Gamma-Ray Astrophysics}
+    \field{volume}{133}
+    \field{journaltitle}{The European Physical Journal Plus}
+    \field{year}{2018}
+  \endentry
+
+  \entry{VHEGA}{article}{}
+    \name{author}{1}{}{%
+      {{hash=ADAMPOM}{%
+         family={A.\bibnamedelima De\bibnamedelima Angelis},
+         familyi={A\bibinitperiod\bibinitdelim D\bibinitperiod\bibinitdelim
+  A\bibinitperiod},
+         suffix={O.\bibnamedelima Mansutti},
+         suffixi={O\bibinitperiod\bibinitdelim M\bibinitperiod},
+         given={M.\bibnamedelima Persic},
+         giveni={M\bibinitperiod\bibinitdelim P\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{ADAOMMP1}
+    \strng{fullhash}{ADAOMMP1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{sortinit}{A}
+    \field{sortinithash}{A}
+    \verb{doi}
+    \verb 10.1393/ncr/i2008-10032-2
+    \endverb
+    \field{title}{Very-High Energy Gamma Astrophysics}
+    \field{volume}{31}
+    \field{journaltitle}{Nuovo Cimento}
+    \field{year}{2008}
+  \endentry
+
+  \entry{grBLLAC}{article}{}
+    \name{author}{1}{}{%
+      {{hash=AFA}{%
+         family={Aharonian},
+         familyi={A\bibinitperiod},
+         given={F.\bibnamedelima A.},
+         giveni={F\bibinitperiod\bibinitdelim A\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{AFA1}
+    \strng{fullhash}{AFA1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{sortinit}{A}
+    \field{sortinithash}{A}
+    \verb{doi}
+    \verb 10.1016/S1384-1076(00)00039-7
+    \endverb
+    \field{title}{TeV gamma rays from BL Lac objects due to synchrotron
+  radiation of extremely high energy protons}
+    \field{volume}{5}
+    \field{journaltitle}{New Astronomy}
+    \field{year}{2000}
+  \endentry
+
+  \entry{FRiA}{article}{}
+    \name{author}{1}{}{%
+      {{hash=FGLSG}{%
+         family={F.\bibnamedelima Giovannelli},
+         familyi={F\bibinitperiod\bibinitdelim G\bibinitperiod},
+         given={L.\bibnamedelima Sabau-Graziati},
+         giveni={L\bibinitperiod\bibinitdelim S\bibinithyphendelim
+  G\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{FGLSG1}
+    \strng{fullhash}{FGLSG1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{sortinit}{F}
+    \field{sortinithash}{F}
+    \verb{doi}
+    \verb 10.22323/1.269.0001
+    \endverb
+    \field{title}{Frontier Research in Astrophysics - A Review}
+    \field{journaltitle}{Proceedings of Frontier Research in Astrophysics}
+    \field{year}{2017}
+  \endentry
+\enddatalist
+\endinput
