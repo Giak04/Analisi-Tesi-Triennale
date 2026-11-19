@@ -14,7 +14,7 @@
 \usepackage{xcolor}
 \usepackage{url}
 \usepackage{fontspec}
-\usepackage[backend=bibtex,bibstyle=numeric]{biblatex}
+\usepackage[backend=bibtex, sorting=none, bibstyle=numeric]{biblatex}
 \usepackage{filecontents}
 \addbibresource{references.bib}
 \setmainfont{Latin Modern Roman}
@@ -60,24 +60,6 @@ Il primo ambito è quello delle onde radio, con lunghezze d'onda che variano tra
 \end{figure}
 
 
-\begin{comment}
-\vspace{10 pt}
-
-
-
-\begin{wrapfigure}{1\textwidth} 
-	%\vspace{-20pt}
-	\begin{center}
-		\includegraphics[width = 1\textwidth]{./Immagini/GreatPhotonSpectrum.png}
-		
-	\end{center}
-	%\vspace{-20pt}
-	\vspace{1pt}
-\end{wrapfigure}
-
-\vspace{10 pt}
-\end{comment}
-
 Si passa poi all'infrarosso, la banda spettrale tipica delle emissioni di corpi con temperature che arrivano fino alle migliaia di kelvin e la cui radiazione tende a superare ostacoli come le nubi di polvere interstellare e consente di studiare sorgenti che sarebbero oscurate in altre bande.
 \\
 
@@ -91,7 +73,8 @@ Aumentando ulteriormente l'energia della radiazione osservata si incontrano le e
 Nonostante la difficoltà nell'osservare questi fotoni per via dell'opacità dell'atmosfera, il che spesso richiede di avere rilevatori in orbita oltre l'atmosfera o persino sonde spaziali, lo studio dei raggi X di origine extraterrestre ha consentito di analizzare processi non percepibili nell'ottico e popolando il cielo di tantissime sorgenti altrimenti invisibili.
 \\
 
-Infine si raggiunge lo spettro dei fotoni gamma, i fotoni più energetici, che aprono una finestra sugli eventi più estremi ed interessanti dell'Universo, ma prima di parlarne è necessario definire cosa emetta radiazioni elettromagnetiche.
+Infine si raggiunge lo spettro dei fotoni gamma, i fotoni più energetici, la cui radiazione viene bloccata dall'atmosfera terrestre.
+Questi fotoni aprono tuttavia una finestra sugli eventi più estremi ed interessanti dell'Universo, ma prima di parlarne è necessario definire cosa emetta radiazioni elettromagnetiche.
 \subsection{Processi di produzione dei fotoni gamma}
 La radiazione elettromagnetica nell'Universo viene emessa sostanzialmente attraverso due processi, che vengono definiti come "emissione termica" e "emissione non termica".
 \\
@@ -121,9 +104,98 @@ Infatti, in quello che viene definito \textit{top-down scenario}, si considera l
 In particolare, il flusso di questi fotoni gamma sarebbe direttamente proporzionale al tasso di annichilimento delle particelle considerate ed allo spettro che i singoli eventi di annichilimento produrrebbero.
 Tuttavia, c'è da considerare che poichè le WIMP sono elettricamente neutre, questi processi sono alquanto rari e spesso dominati in flusso da quelli descritti in precedenza.
 
+\subsection{Sorgenti di raggi gamma}
+Avendo stabilito quali siano i processi che possono portare all'emissione di fotoni gamma, si ritiene ora necessario illustrare quali possano essere principali i fenomeni astrofisici che possono dar vita a suddetti processi.
+\\
+
+\begin{itemize}
+	\item \textbf{Supernove e resti di supernova}: Le supernove sono violente esplosioni stellari che segnano la fine del ciclo vitale di stelle di massa circa superiori alle 8 masse solari.\\ Le supernove, ed in particolare i resti di supernova (\textit{SuperNovae Remnants} o, in breve, SNR), emettono raggi gamma durate le fasi di espansione libera e di Sedov-Taylor. Ciò avviene poiché durante queste fasi il materiale eiettato dall'esplosione si muove ad una velocità maggiore rispetto alla velocità del suono nel mezzo interstellare che lo circonda \cite{SNRGR} generando delle onde d'urto.\\
+	In particolare, gli SNR con un'età di qualche decina di migliaia di anni tendono ad interagire con nuvole molecolari accelerando e ionizzando le particelle al loro interno. Da questo mezzo interstellare ionizato vengono emessi raggi gamma con un'energia prevalentemente nell'ordine dei $ \unit{GeV} $.\\
+	Invece, negli SNR più giovani (con un'età di qualche migliaio di anni) la radiazione gamma proviene dalla \textit{shell} ed il relativo spettro di energia ha un picco nei $ \unit{TeV} $, seguito da un rapido crollo. Questi raggi gamma sono generalmente il frutto dell'emissione di sincrotrone a cui segue un effetto Compton inverso. Le emssioni di raggi gamma da parte di questo tipo di corpi astrofisici ricade nei cosiddetti lampi gamma lunghi (\textit{Long Gamma Ray Bursts} o, in breve, LGBR), emissioni dalla durata superiore ai 2 $ \unit{s} $.
+	\item \textbf{Coalescenze di binarie di stelle di neutroni}: Le stelle di neutroni sono ciò che rimane del nucleo collassato di una stella supergigante e, con un raggio dell'ordine delle decine di $ \unit{km} $ e masse paragonabili a quelle del Sole, sono il secondo tipo di oggetto più denso dell'Universo.\\
+	Per molto tempo non ci sono state prove che anche le coalescenze di binarie di stelle di neutroni potessero emettere raggi gamma, nella forma di lampi gamma brevi (\textit{Short Gamma Ray Bursts} o, in breve, SGBR), ma nel 2017 è stato possibile stabilirlo grazie alle rilevazioni incrociate di onde gravitazionali da parte di Advanced LIGO e Virgo e lampi gamma da parte di Fermi GBM\cite{GWGRBNS}.\\
+	Quando le due stelle di neutroni coalescono, inizialmente viene espulso lo strato più esterno di materiale assieme ad un getto di neutrini, quindi l'onda d'urto si propaga all'interno del guscio accelerandone gli strati esteriori.\\
+	Quando poi il processo termina nel collasso in buco nero, si genera un potente getto, il che causa una seconda onda d'urto all'interno del guscio. Ciò provoca una  \textit{ultrarelativistic photospheric breakout} e l'emissione di fotoni gamma in un ampio angolo solido centrato sull'asse della coalescenza \cite{REGrNSM}.
+ %da trovare delle fonti che descrivano attraverso che processo oltre a solo "gravity-driven dynamo"
+	\item \textbf{Ammassi globulari}: Gli ammassi globulari sono grandi gruppi di stelle (dalle decine di migliaia fino ai milioni) tenuto compatto da una forte spinta gravitazionale che porta gli astri a orbitare in formazioni compatte e stabili.\\
+	Dopo le rilevazioni compiute da Fermi-LAT sono stati individuati e catalogati diversi ammassi globulari che emettono radiazione gamma, anche se l'emissione registrata non supera quasi mai il $ \unit{TeV} $ \cite{GrEGC}. Buona parte della produzione di raggi gamma da parte degli ammassi globulari sembra essere legata alla presenza di \textit{MilliSecond Pulsar} (MSP).
+	\item \textbf{Pulsar}: Le pulsar sono una categoria di stelle di neutroni dall'intenso campo magnetico e che emetto fasci di radiazione elettromagnetica dai propri poli. Spesso sono accompagnate da nebulose di vento pulsar (in inglese \textit{Pulsar Wind Nebula} o, in breve, PWN) anche dette 'plerioni'. Un esempio ne è la Nebulosa Granchio.\\
+	Poiché alla nascita di una pulsar la maggior parte del momento angolare della stella progenitrice viene conservato, ma le dimensioni del nuovo corpo astrale sono decisamente inferiori, queste stelle ruotano ad altissime velocità angolari e la loro energia rotazionale è spesso la sorgente della radiazione elettromagnetica che emettono \cite{GrPE}.\\
+	Anche qui la maggior parte della radiazione gamma, soprattutto nell'ordine energetico dei $ \unit{TeV} $, è dovuto a scattering Compton inverso di fotoni meno energetici, spesso infrarossi, emessi per sincrotrone.
+	\item \textbf{Quasar}: I quasar sono un tipo particolarmente luminoso di AGN la cui emissione è dovuta rilascio di energia da parte del gas nel disco di accrescimento di un buco nero supermassivo mentre accelera e si avvicina all'orizzonte degli eventi.\\
+	Anche nel caso dei quasar, la radiazione gamma viene emessa per scattering Compton inverso su elettroni ultrarelativistici dei fotoni emessi per radiazione di sincrotrone dagli stessi elettroni.\\
+	Tuttavia, è importante notare come, nonostante il processo fondamentale sia lo stesso, l'emissione da parte dei quasar è differente da un GRB, infatti non solo lo spettro è diverso (con i quasar che emetto in un'ampio spettro di frequenze mentre i GRB sono dominati dai raggi gamma), ma anche la durata degli eventi ed il significato fisico dietro a questi fenomeni è sostanzialmente differente. Infatti i quasar sono sorgenti dall'emissione sostenuta, visibili per lunghi periodi di tempo e danno informazioni sulla dinamica delle galassie e sulle attività dei buchi neri, mentre i GBR sono eventi transienti che durano secondi o minuti e ci consentono di studiare l'evoluzione stellare ed il comportamento della materia sotto condizioni estreme.
+	\item \textbf{Blazar}: I blazar sono un tipo particolare di AGN caratterizzati da un getto ultrarelativistico di materia ionizzata rivolto in direzione della Terra e sono categorizzati come oggetti BL Lac o radio quasar a spettro piatto (in inglese \textit{Flat Spectrum Radio Quasar} o, in breve, FSRQ) in base all'intensità delle righe di emissione che si trovano nei loro spettri, con gli oggetti BL Lac che presentano righe deboli o assenti mentre gli FSRQ ne presentano di molto marcate.\\
+	Mentre anche nel caso dell'emissione del blazar una buona parte dei raggi gamma sono prodotti tramite SSC, questo fenomeno da solo non è sufficiente a spiegare gli spettri osservati e dunque qui entra in gioco anche quello che viene detto modello adronico, dove i raggi gamma emergono come effetto della produzione di neutrini ad alta energia da fotomesoni, spesso pioni \cite{UEMB}.\\
+	Un esempio di blazar è Markarian421, la sorgente dei dati analizzati nello studio riportato su questa tesi e che verrà approfondita in seguito.
+\end{itemize}
+\begin{comment}
+
+\end{comment}
+%supernove, AGN, Merger di binarie di stelle di neutroni, pulsar, cluster glbulari, quasar, galassie di Seyfert
 \newpage
 
-\section{Telescopi Cherenkov ed ASTRI}
+\section{Telescopi Cherenkov ed ASTRI Mini-Array}
+
+Come descritto in precedenza, l'atmosfera terrestre è opaca ai raggi gamma, tuttavia esistono comunque dei modi per studiarli da terra, in particolare attraverso gli sciami atmosferici ed i \textit{flash} Cherenkov che questi fotoni altamente energetici emettono all'assorbimento.
+
+\subsection{Sciami atmosferici ed emissione Cherenkov}
+Di seguito si analizzano le caratteristiche degli sciami atmosferici e le proprietà della radiazione Cherenkov prodotti in atmosfera, con particolare riguardo per questa ultima in quanto è l'oggetto di studio dei telescopi Cherenkov.
+
+\subsubsection{Sciami atmosferici}
+I primi studi di sciami atmosferici si concentrarono su quelli prodotti dai raggi cosmici, prima ancora che si sapesse che esistono degli eventi astrofisici in grado di emettere fotoni sufficientemente energetici da produrne \cite{GDVHEGr}.
+\\
+Gli sciami prodotti dai raggi cosmici sono perlopiù sciami adronici.
+
+Particolarmente complessi ed articolati, gli sciami adronici sono quelli iniziati dall'interazione con l'atmosfera di adroni ad altissima energia. Questi interagiscono con i nuclei atmosferici e dalle collisioni emergono nucleoni isolati, pioni, mesoni K e persino porzioni di nuclei.
+
+Molte delle particelle secondarie, come pioni e mesoni, decadono producendo elettroni, positroni, fotoni e muoni, i quali decadono a loro volta in neutrini.
+\\
+
+Gli sciami adronici sono molto irregolari ed arrivano persino a provocare dei sottosciami elettromagnetici.
+\\
+
+Gli sciami elettromagnetici sono, invece, quegli sciami iniziati dalla produzione di coppie elettrone-positrone a partire da un fotone di altissima energia o dall'interazione di elettroni con l'atmosfera.
+
+Vi sono due processi fondamentali che regolano questi tipi di sciami: la produzione di coppie $ e^- \hspace{3 pt} e^+ $ e la radiazione di bremsstrahlung da parte di elettroni e positroni.
+
+Dunque, i fotoni ad alta energia producono coppie elettrone-positrone, le particelle così prodotte emettono fotoni ad alta energia per bremsstrahlung ed il processo si ripete, moltiplicando le particelle prodotte, ma l'energia del fotone incidente viene sempre più dispersa su un numero sempre crescente di particelle finchè gli effetti di perdita di energia per ionizzazione non superano quelli per bremsstrahlung e lo sciame cessa di crescere.
+\\
+
+L'energia persa attraverso l'emissione per bremsstrahlung segue la legge esponenziale:
+$$ E(x) = E_0 e^{-\frac{x}{x_0}(1+b)} $$
+dove $ E_0 $ è l'energia iniziale, $ b $ è un parametro adimensionale che in aria vale circa $ 0,0122 $ e $ x $ ed $ x_0 $ sono due grandezze tipiche di questo problema, ovvero rispettivamente lo spessore integrato sulla densità
+$$ x=\int\rho dz $$
+e la lunghezza di radiazione elettromagnetica.
+$$ x_0=\frac{A}{4\alpha r^2_e N_A Z^2 ln{(183 Z^{-1/3})}} \hspace{3pt}\unit{g}\hspace{1pt}\unit{cm}^{-2}$$
+
+Dove $ Z $ ed $ A $ sono rispettivamente i numeri atomici e di massa del materiale in cui il processo avviene, $ r_e $ è il raggio classico dell'elettrone e $ \alpha = 1/137 $ è la costante di struttura fine.
+
+\subsubsection{Emissione Cherenkov}
+Poichè la maggior parte delle particelle emergenti dalle produzioni di coppia viaggiano nell'atmosfera ad una velocità superiore a quella della luce nello stesso mezzo emettono anche della radiazione Cherenkov, \textit{flash} di pochi nanosecondi il cui picco di emissione si trova tra il blu e l'ultravioletto.
+
+La radiazione è alquanto debole, ma essendo coerente ed emessa in un piccolo angolo rispetto alla direzione originale della particella (per gli eventi in atmosfera si parla di circa $ 1^{\circ} $ \cite{GBGrA}) non solo è possibile rilevarla, ma anche ricostruire con una discreta accuratezza la direzione del fotone gamma incidente.
+\\
+
+Come illustrato nella fiugra \ref{ConoChe}, la dispersione di circa $ 1^{\circ} $ genera un cono che, a terra, ha un raggio di circa $ 120 \hspace{3 pt} \unit{m} $ e che si trovi all'interno di quella circonferenza 8qualsiasi dispositivo che ne sia capace) è in grado di rilevare la radiazione Cherenkov emessa dallo sciame.
+\\
+\begin{figure}[h]
+	\centering
+	\includegraphics[width = 0.8\textwidth]{./Immagini/CherenkovSpread.png}
+	\caption{Cono di luce Cherenkov emesso da una particella carica durante uno sciame \cite{GDVHEGr} }
+	\label{ConoChe}
+\end{figure}
+
+Tuttavia, come espresso in precedenza, anche i raggi cosmici producono sciami a contatto con l'atmosfera ed anche i prodotti secondari degli sciami di raggi cosmici emettono radiazione Cherenkov.
+
+Questi eventi sono circa 1000 volte più comuni \cite{GBGrA} di quelli provocati dai raggi gamma, e per distinguere l'origine dello sciame dalla luce Cherenkov rilevata a terra è necessario studiarne lo spettro e la forma laterale.
+\\
+Un altro problema è il fondo presente nel cielo notturno, in inglese \textit{Night Sky Background} o NSB.
+
+Il NSB è una radiazione di fondo dall'intensità non trascurabile, avendo un numero medio di fotoni dell'ordine dei $ 10^{12} fotoni/\unit{m}^2/\unit{s}/\unit{sr}$ \cite{GBGrA}, il che coprirebbe interamente le poche centiania di fotoni per $ \unit{m}^2 $ di luce Cherenkov proveniente dagli sciami dei raggi gamma che è possibile rilevare.
+\\
+Tuttavia, è possibile filtrare questa radiazione di \textit{background} attraverso alcune accortezze. In primo luogo, poichè il NSB è presente costantemente durante la notte, il rumore da esso provocato può essere diminuito prendendo dati per poche decine di $ \unit{ns} $ alla volta. Inoltre, il picco di intensità di questa radiazione corrisponde a lunghezze d'onda maggiori rispetto a quello della luce Cherenkov, dunque selezionando una strumentazione con un'efficienza molto elevata tra i $ 300\hspace{3pt}\unit{nm} $ ed i $ 400\hspace{3pt}\unit{nm} $ (le lunghezze d'onda di picco della luce Cherenkov) è possibile diminuire ulteriormente il rumore.
+
 
 \newpage
 
